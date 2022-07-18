@@ -99,8 +99,8 @@ if clientID != -1:
         v, arrived = rtb.p_servo(atuador_pose, dum_pose, 1)
         Jacob = robot.jacobe(q)
         Jacob_inv = np.linalg.pinv(Jacob)
-        q_dot = Jacob_inv @ v                
-        q += q_dot*(delta_t)
+        q_dot = np.matmul(Jacob_inv, v)                
+        q += q_dot * delta_t
 
         error = np.linalg.norm(np.array(d) - np.array(X))
         if error < 0.05:
